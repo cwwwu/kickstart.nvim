@@ -389,12 +389,33 @@ do
     styles = {
       comments = { italic = false }, -- Disable italics in comments
     },
+    on_colors = function (colors)
+      colors.bg = '#000000'
+      colors.bg_dark = '#000000'
+      colors.bg_float = '#000000'
+      colors.bg_sidebar = '#000000'
+      colors.bg_visual = '#1c1c1c'
+    end,
   }
+
+  vim.pack.add { { src = gh 'catppuccin/nvim', name = 'catppuccin' } }
+
+  require('catppuccin').setup({
+    color_overrides = {
+      mocha = {
+        base = '#000000',
+        mantle = '#000000',
+        -- crust = '#000000',
+      },
+    },
+  })
+
 
   -- Load the colorscheme here.
   -- Like many other themes, this one has different styles, and you could load
   -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
   vim.cmd.colorscheme 'tokyonight-night'
+  -- vim.cmd.colorscheme 'catppuccin-mocha'
 
   -- Highlight todo, notes, etc in comments
   vim.pack.add { gh 'folke/todo-comments.nvim' }
