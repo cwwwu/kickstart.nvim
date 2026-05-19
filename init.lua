@@ -389,7 +389,7 @@ do
     styles = {
       comments = { italic = false }, -- Disable italics in comments
     },
-    on_colors = function (colors)
+    on_colors = function(colors)
       colors.bg = '#000000'
       colors.bg_dark = '#000000'
       colors.bg_float = '#000000'
@@ -400,7 +400,7 @@ do
 
   vim.pack.add { { src = gh 'catppuccin/nvim', name = 'catppuccin' } }
 
-  require('catppuccin').setup({
+  require('catppuccin').setup {
     color_overrides = {
       mocha = {
         base = '#000000',
@@ -408,8 +408,7 @@ do
         -- crust = '#000000',
       },
     },
-  })
-
+  }
 
   -- Load the colorscheme here.
   -- Like many other themes, this one has different styles, and you could load
@@ -709,7 +708,27 @@ do
   local servers = {
     -- clangd = {},
     -- gopls = {},
-    -- pyright = {},
+    pyright = {
+      settings = {
+        python = {
+          venvPath = '.',
+          venv = '.venv',
+          analysis = {
+            pythonVersion = '3.13',
+            typeCheckingMode = 'basic',
+            exclude = { 'random', '.venv' },
+            diagnosticSeverityOverrides = {
+              reportAttributeAccessIssue = 'none',
+              reportCallIssue = 'none',
+              reportPrivateImportUsage = 'none',
+              reportArgumentType = 'none',
+              reportAssignmentType = 'none',
+              reportRedeclaration = 'none',
+            },
+          },
+        },
+      },
+    },
     -- rust_analyzer = {},
     --
     -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -789,38 +808,40 @@ end
 -- SECTION 6: FORMATTING
 -- conform.nvim setup and keymap
 -- ============================================================
+-- do
+--   -- [[ Formatting ]]
+--   vim.pack.add { gh 'stevearc/conform.nvim' }
+--   require('conform').setup {
+--     notify_on_error = false,
+--     format_on_save = function(bufnr)
+--       -- You can specify filetypes to autoformat on save here:
+--       local enabled_filetypes = {
+--         -- lua = true,
+--         -- python = true,
+--       }
+--       if enabled_filetypes[vim.bo[bufnr].filetype] then
+--         return { timeout_ms = 500 }
+--       else
+--         return nil
+--       end
+--     end,
+--     default_format_opts = {
+--       lsp_format = 'fallback', -- Use external formatters if configured below, otherwise use LSP formatting. Set to `false` to disable LSP formatting entirely.
+--     },
+--     -- You can also specify external formatters in here.
+--     formatters_by_ft = {
+--       -- rust = { 'rustfmt' },
+--       -- Conform can also run multiple formatters sequentially
+--       -- python = { "isort", "black" },
+--       --
+--       -- You can use 'stop_after_first' to run the first available formatter from the list
+--       -- javascript = { "prettierd", "prettier", stop_after_first = true },
+--     },
+--   }
+--
+--   vim.keymap.set({ 'n', 'v' }, '<leader>f', function() require('conform').format { async = true } end, { desc = '[F]ormat buffer' })
+-- end
 do
-  -- [[ Formatting ]]
-  vim.pack.add { gh 'stevearc/conform.nvim' }
-  require('conform').setup {
-    notify_on_error = false,
-    format_on_save = function(bufnr)
-      -- You can specify filetypes to autoformat on save here:
-      local enabled_filetypes = {
-        -- lua = true,
-        -- python = true,
-      }
-      if enabled_filetypes[vim.bo[bufnr].filetype] then
-        return { timeout_ms = 500 }
-      else
-        return nil
-      end
-    end,
-    default_format_opts = {
-      lsp_format = 'fallback', -- Use external formatters if configured below, otherwise use LSP formatting. Set to `false` to disable LSP formatting entirely.
-    },
-    -- You can also specify external formatters in here.
-    formatters_by_ft = {
-      -- rust = { 'rustfmt' },
-      -- Conform can also run multiple formatters sequentially
-      -- python = { "isort", "black" },
-      --
-      -- You can use 'stop_after_first' to run the first available formatter from the list
-      -- javascript = { "prettierd", "prettier", stop_after_first = true },
-    },
-  }
-
-  vim.keymap.set({ 'n', 'v' }, '<leader>f', function() require('conform').format { async = true } end, { desc = '[F]ormat buffer' })
 end
 
 -- ============================================================
@@ -919,7 +940,7 @@ do
   vim.pack.add { { src = gh 'nvim-treesitter/nvim-treesitter', version = 'main' } }
 
   -- Ensure basic parsers are installed
-  local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
+  local parsers = { 'python', 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
   require('nvim-treesitter').install(parsers)
 
   ---@param buf integer
@@ -981,17 +1002,17 @@ do
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  -- require 'kickstart.plugins.debug'
+  require 'kickstart.plugins.debug'
   -- require 'kickstart.plugins.indent_line'
   -- require 'kickstart.plugins.lint'
   -- require 'kickstart.plugins.autopairs'
-  -- require 'kickstart.plugins.neo-tree'
+  require 'kickstart.plugins.neo-tree'
   -- require 'kickstart.plugins.gitsigns' -- adds gitsigns recommended keymaps
 
   -- NOTE: You can add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  -- require 'custom.plugins'
+  require 'custom.plugins'
 end
 
 -- The line beneath this is called `modeline`. See `:help modeline`
