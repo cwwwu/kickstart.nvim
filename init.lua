@@ -395,7 +395,7 @@ do
     on_colors = function(colors)
       colors.bg = '#000000'
       colors.bg_dark = '#000000'
-      colors.bg_float = '#000000'
+      colors.bg_float = '#3c3c3c'
       colors.bg_sidebar = '#000000'
       colors.bg_visual = '#1c1c1c'
     end,
