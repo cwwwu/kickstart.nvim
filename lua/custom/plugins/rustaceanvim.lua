@@ -6,3 +6,10 @@ vim.pack.add {
     version = vim.version.range '^9',
   },
 }
+
+vim.api.nvim_create_autocmd('BufWritePre', {
+  pattern = '*.rs',
+  callback = function()
+    vim.lsp.buf.format { async = false }
+  end,
+})
