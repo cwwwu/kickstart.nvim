@@ -134,6 +134,9 @@ do
   vim.o.ignorecase = true
   vim.o.smartcase = true
 
+  -- Indentation
+  vim.opt.expandtab = true
+
   -- Keep signcolumn on by default
   vim.o.signcolumn = 'yes'
 
