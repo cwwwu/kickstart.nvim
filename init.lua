@@ -136,7 +136,12 @@ do
 
   -- Indentation
   vim.opt.expandtab = true
+  vim.o.shiftwidth = 4
+  vim.o.tabstop = 4
+  vim.o.softtabstop = 4
   vim.o.autoindent = true
+  vim.o.smartindent = true
+  vim.g.rust_recommended_style = false
 
   -- Keep signcolumn on by default
   vim.o.signcolumn = 'yes'

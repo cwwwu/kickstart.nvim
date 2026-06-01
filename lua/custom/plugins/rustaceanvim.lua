@@ -13,3 +13,12 @@ vim.api.nvim_create_autocmd('BufWritePre', {
     vim.lsp.buf.format { async = false }
   end,
 })
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'rust',
+  callback = function(ev)
+    vim.schedule(function()
+      vim.bo[ev.buf].indentexpr = ''
+    end)
+  end,
+})
